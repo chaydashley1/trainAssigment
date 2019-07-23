@@ -71,33 +71,30 @@ trainData.ref().on(
     //   </tr>
     // `;
 
-    var tName = childSnapshot.val().name; // a los childSnapshot hay que asignarle una variable
+    var tName = childSnapshot.val().name; //Asignar variable a childSnapshot
     var tDestination = childSnapshot.val().destination;
     var tFrequency = childSnapshot.val().frequency;
     var tFirstTrain = childSnapshot.val().firstTrain;
 
-    var timeArr = tFirstTrain.split(":"); // divide entre Horas y minutos
+    var timeArr = tFirstTrain.split(":");
 
-    var trainTime = moment().hours(timeArr[0]); //
+    var trainTime = moment().hours(timeArr[0]); //horas y minutos
     moment().minutes(timeArr[1]);
 
-    var maxMoment = moment.max(moment(), trainTime); // Returns the maximum (most distant future) of the given moment instances.
-    var tMinutes;
-    var tArrival;
+    var maxMoment = moment.max(moment(), trainTime); //Llega a punto B / asigna para guardar variable
+    var tMinutes = moment.max(moment(), trainTime);
+    var tArrivalb = moment.max(moment(), trainTime);
 
     if (maxMoment === trainTime) {
-      var tArrival = trainTime.format("hh:mm A"); // It takes a string of tokens and replaces them with their corresponding values.
-      var tMinutes = trainTime.diff(moment(), "minutes"); // get the duration of a difference between two moments
+      var tArrival = trainTime.format("hh:mm A");
+      var tMinutes = trainTime.diff(moment(), "minutes");
     } else {
-      var differenceTimes = moment().diff(trainTime, "minutes"); //variable de restar el tiempo
-
-      var tRemainder = differenceTimes % tFrequency; //lo que sobre (remainder) ES LA VARIABLE FREQUENCY ARRIBA
-
+      var differenceTimes = moment().diff(trainTime, "minutes");
+      var tRemainder = differenceTimes % tFrequency;
       tMinutes = tFrequency - tRemainder;
 
-      tArrival = moment()
-        .add(tMinutes, "m")
-        .format("hh:mm A");
+      tArrival = moment().add(tMinutes, "m");
+      moment().format("hh:mm A");
     }
 
     console.log("tMinutes:", tMinutes);
