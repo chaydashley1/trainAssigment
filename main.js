@@ -105,15 +105,23 @@ trainData.ref().on(
 
     // full list of items to the well
     $("tbody").append(
-      "<div class='well'><span class='trainName-input'> " +
-        childSnapshot.val().name +
-        " </span><span class='destination-input'> " +
-        childSnapshot.val().destination +
-        " </span><span class='firstTime-input'> " +
-        childSnapshot.val().firstTime +
-        " </span><span class='frequency-input'> " +
-        childSnapshot.val().frequency +
-        " </span></div>"
+      `<tr>
+          <td>
+          ${childSnapshot.val().name}
+          </td>
+          <td>
+          ${childSnapshot.val().destination}
+        </td>
+        <td>
+          ${childSnapshot.val().frequency}
+          </td>
+          <td>
+          ${childSnapshot.val().firstTrain}
+        </td>
+        <td>
+        ${tMinutes}
+      </td>
+      </tr>`
     );
 
     // Handle the errors
